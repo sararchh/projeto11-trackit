@@ -2,19 +2,17 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;500;700&display=swap');
 
 :root{
   --background:  #E5E5E5;
-  --background02: #3E3E3E99;
-  --orange: #F87D50;
-  --orange2: #df7752;
-  --black: #1F1F1F;
-  --green-100: #16BB44;
-  --green-200: #4DB783;
-  --blue-700: #0F437B;
-  --white: #FFFFFF;
-  --gray: #969696;
+  --blue: #126ba5;
+  --blue-100: #52B6FF;
+  --green: #8fc549;
+  --white: #ffffff;
+  --white-100: #e6e7e8;
+  --pink: #e75766;
+  --text:  #DBDBDB;
 }
 
 *{
@@ -43,7 +41,7 @@ body{
 }
 
 body, input, textarea, button {
- font-family: 'Rubik', sans-serif;
+  font-family: 'Lexend Deca', sans-serif;
   font-weight: 400;
   border: none;
   outline: none;
@@ -52,21 +50,17 @@ body, input, textarea, button {
 
 h1, h2, h3, h4, h5, h6, strong {
  font-weight: 400;
- font-family: 'Rubik', sans-serif;
- color: var(--black);
+ font-family: 'Lexend Deca', sans-serif;
 }
 
 p {
-  color: var(--black);
-  font-family: 'Rubik', sans-serif;
-}
+  font-family: 'Lexend Deca', sans-serif;}
 
 button{
   cursor: pointer;
   outline: none;
   border: none;
-  font-family: 'Rubik', sans-serif;
-}
+  font-family: 'Lexend Deca', sans-serif;}
 
 a{
   text-decoration: none;
