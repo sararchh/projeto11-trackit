@@ -36,7 +36,7 @@ function CreateAccount() {
   }
 
   return (
-    <Container>
+    <Container background='var(--white)'>
       <img src="./assets/logo.svg" alt="logo" />
 
       <Form onSubmit={handleSubmit(handleCreateAccount)}>

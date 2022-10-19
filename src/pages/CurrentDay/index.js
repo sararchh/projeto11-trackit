@@ -1,10 +1,17 @@
 import React from 'react';
+import Footer from '../../components/molecules/Footer';
+import Header from '../../components/molecules/Header';
+
+import { Container } from '../../styles/commonStyles';
 
 // import { Container } from './styles';
 
 function CurrentDay() {
   return (
-    <p>rota hoje</p>
+    <Container>
+      <Header />
+      <Footer/>
+    </Container>
   )
 }
 

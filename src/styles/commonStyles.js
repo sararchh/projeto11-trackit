@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 375px;
 
   height: 100vh;
+  background-color: ${({ background }) => background ? background : 'var(--background)'};
 
   display: flex;
   align-items: center;

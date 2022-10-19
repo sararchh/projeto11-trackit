@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import CreateAccount from '../pages/CreateAccount';
 import CurrentDay from '../pages/CurrentDay';
+import Habits from '../pages/Habits';
+import Historic from '../pages/Historic';
 import Home from '../pages/Home/Home';
 
 const NotFound = () => {
@@ -20,6 +22,8 @@ function RoutesApp() {
         <Route path='/' element={<Home />} />
         <Route path='/cadastro' element={<CreateAccount />} />
         <Route path='/hoje' element={<CurrentDay />} />
+        <Route path='/habitos' element={<Habits />} />
+        <Route path='/historico' element={<Historic />} />
 
       </Routes>
     </>

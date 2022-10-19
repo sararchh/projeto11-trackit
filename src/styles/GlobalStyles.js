@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 
 :root{
   --background:  #E5E5E5;
@@ -15,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
   --text:  #DBDBDB;
   --disabled: #F2F2F2;
   --text-disabled: #AFAFAF;
+  --text-historic: #666666;
 }
 
 *{
@@ -40,6 +42,7 @@ body{
   width: 375px;
   box-sizing: border-box;
   overflow-x: hidden;
+  background: var(--background);
 }
 
 body, input, textarea, button {
