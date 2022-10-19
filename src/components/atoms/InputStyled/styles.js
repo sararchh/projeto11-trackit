@@ -15,4 +15,9 @@ export const Input = styled.input`
 
   padding: 8px;
   margin: 5px 0;
+
+  &:disabled {
+    background: var(--disabled);
+    color: var(--text-disabled);
+  }
 `;
