@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Button } from './styles';
 
-function ButtonDay({ day, handleClickDay, daySelected }) {
+function ButtonDay({ day, func, daySelected }) {
 
   return (
     <Button
       type='button'
-      onClick={handleClickDay}
+      onClick={func}
       daySelected={daySelected}
     >
 

@@ -5,34 +5,26 @@ import Footer from '../../components/molecules/Footer';
 import Header from '../../components/molecules/Header';
 import CardCreateHabits from '../../components/molecules/CardCreateHabits';
 
-import { api } from '../../services/api';
-
 import { IoMdAdd } from "react-icons/io";
 
 import { Container, Title, Text, ContentTitle } from './styles';
 import { UserContext } from '../../Contexts/userContext';
+import CardHabits from '../../components/molecules/CardHabits';
 
 function Habits() {
   const [openCardCreateHabits, setOpenCardCreateHabits] = useState(false);
-  const [habitsUser, setHabitsUser] = useState([{}]);
 
-  const { userLogged } = useContext(UserContext);
+
+  const { getHabits, habitsUser } = useContext(UserContext);
 
   useEffect(() => {
 
-    // TODO Ao salvar chamar a funcao
     getHabits();
 
     // eslint-disable-next-line
   }, []);
 
-  const getHabits = async () => {
-    const { data } = await api.get('/habits', { headers: { Authorization: `Bearer ${userLogged.token}` } });
-
-    setHabitsUser(data);
-  }
-  console.log('habitsUser', habitsUser);
-
+  
   return (
     <Container>
       <Header />
@@ -54,8 +46,13 @@ function Habits() {
       )}
 
       {habitsUser.length > 1 ?
-        (habitsUser.map((i)=>(
-          <p>{i.name}</p>
+        (habitsUser.map((i) => (
+          <CardHabits
+            key={i.id}
+            id={i.id}
+            name={i.name}
+            days={i.days}
+          />
         )))
         :
         (<Text>

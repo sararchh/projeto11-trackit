@@ -14,7 +14,8 @@ export function UserContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [disabledInput, setDisabledInput] = useState(false);
   const [userLogged, setUserLogged] = useState({});
-  const [progressbar, setProgressbar] = useState()
+  const [progressbar, setProgressbar] = useState();
+  const [habitsUser, setHabitsUser] = useState([{}]);
 
   const createAccountWithMail = async (values) => {
     try {
@@ -58,6 +59,13 @@ export function UserContextProvider({ children }) {
     }
   }
 
+  const getHabits = async () => {
+    const { data } = await api.get('/habits', { headers: { Authorization: `Bearer ${userLogged.token}` } });
+
+    setHabitsUser(data);
+  }
+
+
   return (
     <UserContext.Provider
       value={{
@@ -67,7 +75,9 @@ export function UserContextProvider({ children }) {
         userLogged,
         disabledInput,
         progressbar,
-        setProgressbar
+        setProgressbar,
+        getHabits,
+        habitsUser
       }}>
 
       {children}

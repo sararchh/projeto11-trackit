@@ -22,7 +22,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
   const [loadingToSave, setLoadingToSave] = useState(false);
   const [daysSelected, setDaysSelected] = useState([]);
 
-  const { userLogged } = useContext(UserContext);
+  const { userLogged, getHabits } = useContext(UserContext);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Nome obrigatório'),
@@ -36,7 +36,6 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
   const handleCreateHabits = async () => {
     const values = getValues();
 
-
     const body = {
       name: values.name,
       days: daysSelected
@@ -49,6 +48,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
       setDisabledInput(true)
       setTimeout(() => { setLoadingToSave(false) }, 2000);
       setTimeout(() => { setOpenCardCreateHabits(false) }, 2000);
+      getHabits()
 
     } catch (error) {
       setDisabledInput(false);
@@ -78,10 +78,10 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
 
         <div>
           {days.map((i, index) => (
-            <span className='marginInput'>
+            <span className='marginInput' key={index} >
               <ButtonDay
                 day={i}
-                handleClickDay={() => handleClickDay(index)}
+                func={() => handleClickDay(index)}
                 daySelected={daysSelected.includes(index)}
               />
             </span>

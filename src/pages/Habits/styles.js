@@ -7,10 +7,12 @@ export const Container = styled.div`
   padding: 110px 20px;
   height: 100vh;
 
+  overflow: scroll;
+
   background-color: var(--background);
 `;
 
-export const Title = styled.p `
+export const Title = styled.p`
   color: var(--blue-100);
   font-weight: 400;
   font-size: 22.976px;
