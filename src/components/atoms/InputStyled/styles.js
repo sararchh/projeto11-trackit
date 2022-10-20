@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  span {
+    display: flex;
+  }
+`;
+
 export const Input = styled.input`
-  width: 303px;
-  height: 45px;
+  width: ${({ w }) => w};
+  height: ${({ h }) => h};
 
   background: var(--white);
   border: 1px solid #D5D5D5;
@@ -13,7 +19,7 @@ export const Input = styled.input`
   font-size: 19px;
   line-height: 25px;
 
-  padding: 8px;
+  padding: 7px;
   margin: 5px 0;
 
   &:disabled {

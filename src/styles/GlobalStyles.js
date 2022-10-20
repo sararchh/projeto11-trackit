@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   --disabled: #F2F2F2;
   --text-disabled: #AFAFAF;
   --text-historic: #666666;
+  --day: #CFCFCF;
 }
 
 *{

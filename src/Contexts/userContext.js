@@ -14,6 +14,7 @@ export function UserContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [disabledInput, setDisabledInput] = useState(false);
   const [userLogged, setUserLogged] = useState({});
+  const [progressbar, setProgressbar] = useState()
 
   const createAccountWithMail = async (values) => {
     try {
@@ -64,7 +65,9 @@ export function UserContextProvider({ children }) {
         createAccountWithMail,
         loading,
         userLogged,
-        disabledInput
+        disabledInput,
+        progressbar,
+        setProgressbar
       }}>
 
       {children}

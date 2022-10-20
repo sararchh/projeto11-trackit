@@ -15,4 +15,5 @@ export const Button = styled.button`
   font-size: 20.976px;
   line-height: 26px;
   color: var(--white);
+
 `;
