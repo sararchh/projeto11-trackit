@@ -15,7 +15,7 @@ export function UserContextProvider({ children }) {
   const [disabledInput, setDisabledInput] = useState(false);
   const [userLogged, setUserLogged] = useState({});
   const [progressbar, setProgressbar] = useState();
-  const [habitsUser, setHabitsUser] = useState([{}]);
+  const [habitsUser, setHabitsUser] = useState([]);
 
   const createAccountWithMail = async (values) => {
     try {

@@ -1,13 +1,18 @@
 import React, { useContext, useState } from 'react';
 
-import { Container } from './styles';
 
-import { BiTrash } from "react-icons/bi";
 import ButtonDay from '../../atoms/ButtonDay';
 import { api } from '../../../services/api';
 import { UserContext } from '../../../Contexts/userContext';
 
-const arrayDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+import { Container } from './styles';
+import { BiTrash } from "react-icons/bi";
+import { toast } from 'react-toastify';
+
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
+const arrayDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
 function CardHabits({ days, id, name }) {
   // eslint-disable-next-line 
@@ -15,11 +20,34 @@ function CardHabits({ days, id, name }) {
 
   const { userLogged, getHabits } = useContext(UserContext);
 
-  const handleRemoveHabits = async (idDay) => {
-    const response =  await api.delete(`/habits/${idDay}`, { headers: { Authorization: `Bearer ${userLogged.token}` } });
+  const handleConfirmDelete = (idDay) => {
+      confirmAlert({
+        title: "Deseja excluir o Hábito?",
+        message: "",
+        buttons: [
+          {
+            label: "Sim",
+            onClick: () => {
+              handleRemoveHabits(idDay)
+            }
+          },
+          {
+            label: "Não"
+          }
+        ]
+      });
 
-    getHabits();
-    console.log('response', response);
+      
+  }
+
+  const handleRemoveHabits = async (idDay) => {
+    try {
+      await api.delete(`/habits/${idDay}`, { headers: { Authorization: `Bearer ${userLogged.token}` } });
+
+      getHabits();
+    } catch (error) {
+      toast.error('Erro ao Deletar Hábito')
+    }
   }
 
   return (
@@ -27,13 +55,13 @@ function CardHabits({ days, id, name }) {
       <div className='divName'>
         <h1>{name}</h1>
 
-        <button onClick={() => handleRemoveHabits(id)}>
+        <button onClick={() => handleConfirmDelete(id)}>
           <BiTrash />
         </button>
       </div>
 
       <div>
-        {arrayDays.map((i, index) => (
+        {Boolean(arrayDays.length) && arrayDays.map((i, index) => (
           <span>
             <ButtonDay
               day={i}
