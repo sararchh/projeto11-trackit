@@ -6,6 +6,7 @@ function ButtonDay({ day, handleClickDay, daySelected }) {
 
   return (
     <Button
+      type='button'
       onClick={handleClickDay}
       daySelected={daySelected}
     >

@@ -12,11 +12,14 @@ import { Container, ButtonCancel } from './styles';
 import { api } from '../../../services/api';
 import { UserContext } from '../../../Contexts/userContext';
 import { toast } from 'react-toastify';
+import { ThreeDots } from 'react-loader-spinner';
 
 const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
-function CardHabits() {
+function CardCreateHabits({ setOpenCardCreateHabits }) {
+
   const [disabledInput, setDisabledInput] = useState(false);
+  const [loadingToSave, setLoadingToSave] = useState(false);
   const [daysSelected, setDaysSelected] = useState([]);
 
   const { userLogged } = useContext(UserContext);
@@ -33,22 +36,29 @@ function CardHabits() {
   const handleCreateHabits = async () => {
     const values = getValues();
 
+
     const body = {
       name: values.name,
       days: daysSelected
     }
 
     try {
-      const response = await api.post('/habits', body,  { headers: { Authorization: `Bearer ${userLogged.token}` } });
-      console.log('response', response.data);
+      await api.post('/habits', body, { headers: { Authorization: `Bearer ${userLogged.token}` } });
+      
+      setLoadingToSave(true);
+      setDisabledInput(true)
+      setTimeout(() => { setLoadingToSave(false) }, 2000);
+      setTimeout(() => { setOpenCardCreateHabits(false) }, 2000);
 
     } catch (error) {
+      setDisabledInput(false);
+      setLoadingToSave(true);
+      setTimeout(() => { setLoadingToSave(false) }, 2000);
       toast.error('Erro ao criar hábito');
     }
   }
 
   const handleClickDay = (index) => {
-
     const newArray = [...daysSelected, index];
     setDaysSelected(newArray);
   }
@@ -79,12 +89,31 @@ function CardHabits() {
         </div>
 
         <div className='buttons'>
-          <ButtonCancel>Cancelar</ButtonCancel>
-          <ButtonStyled w='84px' h='35px' type='submit'>Salvar</ButtonStyled>
+          <ButtonCancel type='button' onClick={()=>setOpenCardCreateHabits(false)} >Cancelar</ButtonCancel>
+          <ButtonStyled
+            w='84px'
+            h='35px'
+            type='submit'
+          >
+            {loadingToSave ?
+              <ThreeDots
+                height="50"
+                width="50"
+                radius="9"
+                color="#ffffff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+              :
+              <p>Salvar</p>
+            }
+          </ButtonStyled>
         </div>
       </form>
     </Container>
   )
 }
 
-export default CardHabits;
+export default CardCreateHabits;
