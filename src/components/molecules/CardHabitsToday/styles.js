@@ -27,7 +27,9 @@ export const Container = styled.div`
     color: var(--white);
     width: 35px;
     height: 28px;
-  }
+  } 
+
+  
 `;
 
 export const Text = styled.p`
@@ -35,13 +37,17 @@ export const Text = styled.p`
   font-size: 12.976px;
   line-height: 16px;
   color: var(--text-historic);
+
+  span {
+    color: ${({ currentAndHighSequence }) => currentAndHighSequence ? 'var(--green)' : 'var(--text-historic)'};
+  }
 `;
 
 export const ButtonConfirm = styled.button`
   height: 69px;
   width: 69px;
 
-  background: ${({ confirmHabit })=> confirmHabit ? 'var(--green)' : 'var(--gray-200)'};
+  background: ${({ confirmHabit }) => confirmHabit ? 'var(--green)' : 'var(--gray-200)'};
   border: 1px solid #E7E7E7;
   border-radius: 5px;
 `
