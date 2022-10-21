@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 
-
 import ButtonDay from '../../atoms/ButtonDay';
 import { api } from '../../../services/api';
 import { UserContext } from '../../../Contexts/userContext';
@@ -12,7 +11,7 @@ import { toast } from 'react-toastify';
 import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-const arrayDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+import { arrayDays } from '../../../utils/arrays';
 
 function CardHabits({ days, id, name }) {
   // eslint-disable-next-line 

@@ -45,7 +45,6 @@ function Habits() {
         <CardCreateHabits setOpenCardCreateHabits={setOpenCardCreateHabits} />
       )}
 
-        {console.log('habitsUser', habitsUser)}
       {Boolean(habitsUser.length) ?
         (habitsUser.map((i) => (
           <CardHabits
