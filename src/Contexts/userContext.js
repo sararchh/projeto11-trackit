@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,6 @@ export function UserContextProvider({ children }) {
   const [habitsUser, setHabitsUser] = useState([]);
   const [habitsToday, setHabitsToday] = useState();
 
-  let percentage;
   const createAccountWithMail = async (values) => {
     try {
       const obj = {
@@ -52,6 +51,7 @@ export function UserContextProvider({ children }) {
       setLoading(true);
       setDisabledInput(true);
       setTimeout(() => { navigate('hoje'); }, 2000);
+      setTimeout(() => { setLoading(false) }, 2000);
 
     } catch (error) {
       setLoading(true);
@@ -65,6 +65,7 @@ export function UserContextProvider({ children }) {
     const { data } = await api.get('/habits', { headers: { Authorization: `Bearer ${userLogged.token}` } });
 
     setHabitsUser(data);
+    listHabitsToday();
   }
 
   const listHabitsToday = async () => {
@@ -73,8 +74,9 @@ export function UserContextProvider({ children }) {
     setHabitsToday(data);
   }
 
+  let percentage;
   const calculatePercentage = () => {
-    if (habitsToday !== undefined) {
+    if (habitsToday !== undefined && habitsToday.length > 0) {
 
       const qtdHabitsToday = habitsToday.length;
       let soma = 0;
@@ -86,11 +88,13 @@ export function UserContextProvider({ children }) {
       })
 
       percentage = (soma / qtdHabitsToday) * 100;
+      percentage = percentage.toFixed(0)
     }
   }
 
   calculatePercentage();
-  //TODO chamar funcao em um useffect toda vez que criar um habito novo e no momento de excluir um habito
+  //TODO nao posso chamar essa funcao avulsa;
+  //Adicionar o token no local storage
 
   return (
     <UserContext.Provider

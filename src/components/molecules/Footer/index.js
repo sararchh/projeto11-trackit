@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
-import { api } from '../../../services/api';
 import { UserContext } from '../../../Contexts/userContext';
 
 import {
@@ -18,6 +17,8 @@ function Footer() {
     listHabitsToday();
     // eslint-disable-next-line
   }, []);
+
+  console.log('percentage', percentage)
 
   return (
     <Container>

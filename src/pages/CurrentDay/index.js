@@ -29,7 +29,7 @@ function CurrentDay() {
       <ContentTitle>
         <Title>{daysWeek[weekday]}, {today[0]}/{today[1]}</Title>
 
-        {percentage === 0 ?
+        {percentage == 0 || percentage === undefined ?
           <p> Nenhum hábito concluído ainda</p>
           :
           <p className='colorTextPercentage'> {percentage}% dos hábitos concluídos</p>

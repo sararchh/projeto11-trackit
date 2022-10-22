@@ -20,11 +20,10 @@ function Habits() {
   useEffect(() => {
 
     getHabits();
-
     // eslint-disable-next-line
   }, []);
 
-  
+
   return (
     <Container>
       <Header />

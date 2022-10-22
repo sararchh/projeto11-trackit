@@ -48,8 +48,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
       setDisabledInput(true)
       setTimeout(() => { setLoadingToSave(false) }, 2000);
       setTimeout(() => { setOpenCardCreateHabits(false) }, 2000);
-      getHabits()
-      calculatePercentage();
+      getHabits();
 
     } catch (error) {
       setDisabledInput(false);

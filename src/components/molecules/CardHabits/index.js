@@ -17,7 +17,7 @@ function CardHabits({ days, id, name }) {
   // eslint-disable-next-line 
   const [daySelected, setDaySelected] = useState(days);
 
-  const { userLogged, getHabits } = useContext(UserContext);
+  const { userLogged, getHabits, listHabitsToday } = useContext(UserContext);
 
   const handleConfirmDelete = (idDay) => {
       confirmAlert({
@@ -44,6 +44,7 @@ function CardHabits({ days, id, name }) {
       await api.delete(`/habits/${idDay}`, { headers: { Authorization: `Bearer ${userLogged.token}` } });
 
       getHabits();
+      listHabitsToday();
     } catch (error) {
       toast.error('Erro ao Deletar Hábito')
     }
