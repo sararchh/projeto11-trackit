@@ -9,7 +9,7 @@ import ButtonStyled from '../../atoms/ButtonStyled';
 import ButtonDay from '../../atoms/ButtonDay';
 
 import { Container, ButtonCancel } from './styles';
-import { api } from '../../../services/api';
+import api from '../../../services/api';
 import { UserContext } from '../../../Contexts/userContext';
 import { toast } from 'react-toastify';
 import { ThreeDots } from 'react-loader-spinner';
@@ -22,7 +22,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
   const [loadingToSave, setLoadingToSave] = useState(false);
   const [daysSelected, setDaysSelected] = useState([]);
 
-  const { userLogged, getHabits, calculatePercentage } = useContext(UserContext);
+  const { getHabits } = useContext(UserContext);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Nome obrigatório'),
@@ -42,8 +42,8 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
     }
 
     try {
-      await api.post('/habits', body, { headers: { Authorization: `Bearer ${userLogged.token}` } });
-      
+      await api.post('/habits', body);
+
       setLoadingToSave(true);
       setDisabledInput(true)
       setTimeout(() => { setLoadingToSave(false) }, 2000);
@@ -89,7 +89,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
         </div>
 
         <div className='buttons'>
-          <ButtonCancel type='button' onClick={()=>setOpenCardCreateHabits(false)} >Cancelar</ButtonCancel>
+          <ButtonCancel type='button' onClick={() => setOpenCardCreateHabits(false)} >Cancelar</ButtonCancel>
           <ButtonStyled
             w='84px'
             h='35px'

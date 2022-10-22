@@ -6,6 +6,7 @@ import CurrentDay from '../pages/CurrentDay';
 import Habits from '../pages/Habits';
 import Historic from '../pages/Historic';
 import Home from '../pages/Home/Home';
+import UserAccount from '../pages/UserAccount';
 
 const NotFound = () => {
   return (
@@ -24,6 +25,7 @@ function RoutesApp() {
         <Route path='/hoje' element={<CurrentDay />} />
         <Route path='/habitos' element={<Habits />} />
         <Route path='/historico' element={<Historic />} />
+        <Route path='/conta' element={<UserAccount />} />
 
       </Routes>
     </>

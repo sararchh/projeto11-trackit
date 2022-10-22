@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import ButtonDay from '../../atoms/ButtonDay';
-import { api } from '../../../services/api';
+import api from '../../../services/api';
 import { UserContext } from '../../../Contexts/userContext';
 
 import { Container } from './styles';
@@ -17,31 +17,31 @@ function CardHabits({ days, id, name }) {
   // eslint-disable-next-line 
   const [daySelected, setDaySelected] = useState(days);
 
-  const { userLogged, getHabits, listHabitsToday } = useContext(UserContext);
+  const { getHabits, listHabitsToday } = useContext(UserContext);
 
   const handleConfirmDelete = (idDay) => {
-      confirmAlert({
-        title: "Deseja excluir o Hábito?",
-        message: "",
-        buttons: [
-          {
-            label: "Sim",
-            onClick: () => {
-              handleRemoveHabits(idDay)
-            }
-          },
-          {
-            label: "Não"
+    confirmAlert({
+      title: "Deseja excluir o Hábito?",
+      message: "",
+      buttons: [
+        {
+          label: "Sim",
+          onClick: () => {
+            handleRemoveHabits(idDay)
           }
-        ]
-      });
+        },
+        {
+          label: "Não"
+        }
+      ]
+    });
 
-      
+
   }
 
   const handleRemoveHabits = async (idDay) => {
     try {
-      await api.delete(`/habits/${idDay}`, { headers: { Authorization: `Bearer ${userLogged.token}` } });
+      await api.delete(`/habits/${idDay}`);
 
       getHabits();
       listHabitsToday();

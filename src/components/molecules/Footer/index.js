@@ -18,8 +18,6 @@ function Footer() {
     // eslint-disable-next-line
   }, []);
 
-  console.log('percentage', percentage)
-
   return (
     <Container>
       <Link to='/habitos'>

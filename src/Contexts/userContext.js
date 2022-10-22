@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
-import { api } from "../services/api";
+import api  from "../services/api";
+import { authRoutes } from "../utils/arrays";
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const [fallBackLoading, setFallBackLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [disabledInput, setDisabledInput] = useState(false);
   const [userLogged, setUserLogged] = useState({});
-  const [progressbar, setProgressbar] = useState();
   const [habitsUser, setHabitsUser] = useState([]);
   const [habitsToday, setHabitsToday] = useState();
+  const [percentage, setPercentage] = useState(0);
+
+  useEffect(() => {
+    calculatePercentage();
+    // eslint-disable-next-line
+  }, [habitsToday]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token && authRoutes.includes(location.pathname)) {
+      navigate('/', { replace: true });
+    }
+    setTimeout(() => { setFallBackLoading(false) }, 800);
+    // eslint-disable-next-line
+  }, [])
 
   const createAccountWithMail = async (values) => {
     try {
@@ -47,11 +64,14 @@ export function UserContextProvider({ children }) {
     try {
       const { data } = await api.post('/auth/login', values);
       setUserLogged(data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("image", data.image);
 
       setLoading(true);
       setDisabledInput(true);
       setTimeout(() => { navigate('hoje'); }, 2000);
       setTimeout(() => { setLoading(false) }, 2000);
+      setDisabledInput(false);
 
     } catch (error) {
       setLoading(true);
@@ -62,19 +82,18 @@ export function UserContextProvider({ children }) {
   }
 
   const getHabits = async () => {
-    const { data } = await api.get('/habits', { headers: { Authorization: `Bearer ${userLogged.token}` } });
+    const { data } = await api.get('/habits');
 
     setHabitsUser(data);
     listHabitsToday();
   }
 
   const listHabitsToday = async () => {
-    const { data } = await api.get('/habits/today', { headers: { Authorization: `Bearer ${userLogged.token}` } });
+    const { data } = await api.get('/habits/today');
 
     setHabitsToday(data);
   }
 
-  let percentage;
   const calculatePercentage = () => {
     if (habitsToday !== undefined && habitsToday.length > 0) {
 
@@ -87,14 +106,10 @@ export function UserContextProvider({ children }) {
         }
       })
 
-      percentage = (soma / qtdHabitsToday) * 100;
-      percentage = percentage.toFixed(0)
+      let percent = ((soma / qtdHabitsToday) * 100).toFixed(0);
+      setPercentage(percent);
     }
   }
-
-  calculatePercentage();
-  //TODO nao posso chamar essa funcao avulsa;
-  //Adicionar o token no local storage
 
   return (
     <UserContext.Provider
@@ -104,8 +119,6 @@ export function UserContextProvider({ children }) {
         loading,
         userLogged,
         disabledInput,
-        progressbar,
-        setProgressbar,
         getHabits,
         habitsUser,
         listHabitsToday,
@@ -113,8 +126,8 @@ export function UserContextProvider({ children }) {
         calculatePercentage,
         percentage
       }}>
-
-      {children}
+      {fallBackLoading && <div />}
+      {!fallBackLoading && children}
     </UserContext.Provider>
   );
 }

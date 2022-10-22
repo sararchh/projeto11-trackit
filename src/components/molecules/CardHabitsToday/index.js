@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { BsCheckLg } from "react-icons/bs";
 import { UserContext } from '../../../Contexts/userContext';
-import { api } from '../../../services/api';
+import api from '../../../services/api';
 
 import { Container, Text, ButtonConfirm } from './styles';
 
@@ -10,7 +10,7 @@ function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
   const [confirmHabit, setConfirmHabit] = useState();
   const [currentAndHighSequence, setCurrentAndHighSequence] = useState(false);
 
-  const { userLogged, listHabitsToday } = useContext(UserContext);
+  const { listHabitsToday } = useContext(UserContext);
 
   useEffect(() => {
     handleSelectHabit(id);
@@ -32,12 +32,12 @@ function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
 
 
   const handleCheckHabit = async (idHabit) => {
-    await api.post(`/habits/${idHabit}/check`, null, { headers: { Authorization: `Bearer ${userLogged.token}` } });
+    await api.post(`/habits/${idHabit}/check`, null);
     listHabitsToday();
   }
 
   const handleUnCheckfHabit = async (idHabit) => {
-    await api.post(`/habits/${idHabit}/uncheck`, null, { headers: { Authorization: `Bearer ${userLogged.token}` } });
+    await api.post(`/habits/${idHabit}/uncheck`, null);
     listHabitsToday();
   };
 
