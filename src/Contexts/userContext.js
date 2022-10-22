@@ -18,6 +18,7 @@ export function UserContextProvider({ children }) {
   const [habitsUser, setHabitsUser] = useState([]);
   const [habitsToday, setHabitsToday] = useState();
 
+  let percentage;
   const createAccountWithMail = async (values) => {
     try {
       const obj = {
@@ -72,6 +73,24 @@ export function UserContextProvider({ children }) {
     setHabitsToday(data);
   }
 
+  const calculatePercentage = () => {
+    if (habitsToday !== undefined) {
+
+      const qtdHabitsToday = habitsToday.length;
+      let soma = 0;
+
+      habitsToday.forEach((i) => {
+        if (i.done === true) {
+          soma += 1;
+        }
+      })
+
+      percentage = (soma / qtdHabitsToday) * 100;
+    }
+  }
+
+  calculatePercentage();
+  //TODO chamar funcao em um useffect toda vez que criar um habito novo e no momento de excluir um habito
 
   return (
     <UserContext.Provider
@@ -86,7 +105,9 @@ export function UserContextProvider({ children }) {
         getHabits,
         habitsUser,
         listHabitsToday,
-        habitsToday
+        habitsToday,
+        calculatePercentage,
+        percentage
       }}>
 
       {children}

@@ -61,7 +61,7 @@ function CardHabits({ days, id, name }) {
 
       <div>
         {Boolean(arrayDays.length) && arrayDays.map((i, index) => (
-          <span>
+          <span key={index}>
             <ButtonDay
               day={i}
               daySelected={daySelected.includes(index)}

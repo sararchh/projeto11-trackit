@@ -23,6 +23,10 @@ export const ContentTitle = styled.div`
     color: var(--text-today);
     margin-bottom: 15px;
   }
+
+  .colorTextPercentage{
+    color: var(--green);
+  }
 `;
 
 export const Title = styled.h3`

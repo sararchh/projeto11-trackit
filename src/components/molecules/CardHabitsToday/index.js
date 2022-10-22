@@ -7,7 +7,7 @@ import { api } from '../../../services/api';
 import { Container, Text, ButtonConfirm } from './styles';
 
 function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
-  const [confirmHabit, setConfirmHabit] = useState(false);
+  const [confirmHabit, setConfirmHabit] = useState();
   const [currentAndHighSequence, setCurrentAndHighSequence] = useState(false);
 
   const { userLogged, listHabitsToday } = useContext(UserContext);
@@ -29,6 +29,7 @@ function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
       handleUnCheckfHabit(idHabit)
     }
   }
+
 
   const handleCheckHabit = async (idHabit) => {
     await api.post(`/habits/${idHabit}/check`, null, { headers: { Authorization: `Bearer ${userLogged.token}` } });
@@ -54,7 +55,7 @@ function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
         <ButtonConfirm
           type='button'
           onClick={() => setConfirmHabit(!confirmHabit)}
-          confirmHabit={confirmHabit}
+          confirmHabit={confirmHabit || done}
         >
           <BsCheckLg />
         </ButtonConfirm>

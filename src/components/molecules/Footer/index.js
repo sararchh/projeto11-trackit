@@ -12,14 +12,12 @@ import {
 import { Container } from './styles';
 
 function Footer() {
-  const { listHabitsToday, habitsToday } = useContext(UserContext);
+  const { listHabitsToday, percentage } = useContext(UserContext);
 
   useEffect(() => {
     listHabitsToday();
     // eslint-disable-next-line
   }, []);
-
-  const percentage = 66;
 
   return (
     <Container>

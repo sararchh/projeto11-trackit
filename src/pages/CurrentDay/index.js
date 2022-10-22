@@ -9,15 +9,13 @@ import { ContentTitle, Container, Title } from './styles';
 
 function CurrentDay() {
 
-  const { listHabitsToday, habitsToday } = useContext(UserContext);
+  const { listHabitsToday, habitsToday, percentage } = useContext(UserContext);
 
   useEffect(() => {
 
     listHabitsToday();
     // eslint-disable-next-line
   }, []);
-
-  console.log('habitsToday', habitsToday)
 
   const date = new Intl.DateTimeFormat(['ban', 'id']).format(new Date());
   const today = date.split('/');
@@ -31,7 +29,11 @@ function CurrentDay() {
       <ContentTitle>
         <Title>{daysWeek[weekday]}, {today[0]}/{today[1]}</Title>
 
-        <p>Nenhum hábito concluído ainda</p>
+        {percentage === 0 ?
+          <p> Nenhum hábito concluído ainda</p>
+          :
+          <p className='colorTextPercentage'> {percentage}% dos hábitos concluídos</p>
+        }
       </ContentTitle>
 
       <div>

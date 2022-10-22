@@ -47,7 +47,7 @@ export const ButtonConfirm = styled.button`
   height: 69px;
   width: 69px;
 
-  background: ${({ confirmHabit }) => confirmHabit ? 'var(--green)' : 'var(--gray-200)'};
+  background: ${({ confirmHabit, done }) => confirmHabit || done ? 'var(--green)' : 'var(--gray-200)'};
   border: 1px solid #E7E7E7;
   border-radius: 5px;
 `

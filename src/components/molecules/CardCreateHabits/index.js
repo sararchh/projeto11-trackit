@@ -22,7 +22,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
   const [loadingToSave, setLoadingToSave] = useState(false);
   const [daysSelected, setDaysSelected] = useState([]);
 
-  const { userLogged, getHabits } = useContext(UserContext);
+  const { userLogged, getHabits, calculatePercentage } = useContext(UserContext);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Nome obrigatório'),
@@ -49,6 +49,7 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
       setTimeout(() => { setLoadingToSave(false) }, 2000);
       setTimeout(() => { setOpenCardCreateHabits(false) }, 2000);
       getHabits()
+      calculatePercentage();
 
     } catch (error) {
       setDisabledInput(false);
