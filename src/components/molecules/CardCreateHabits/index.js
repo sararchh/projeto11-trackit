@@ -89,8 +89,9 @@ function CardCreateHabits({ setOpenCardCreateHabits }) {
         </div>
 
         <div className='buttons'>
-          <ButtonCancel type='button' onClick={() => setOpenCardCreateHabits(false)} >Cancelar</ButtonCancel>
+          <ButtonCancel type='button' onClick={() => setOpenCardCreateHabits(false)} data-identifier="cancel-habit-create-btn" >Cancelar</ButtonCancel>
           <ButtonStyled
+            data-identifier="save-habit-create-btn"
             w='84px'
             h='35px'
             type='submit'

@@ -14,8 +14,8 @@ function Header() {
   return (
     <Container>
       <h1>TrackIt</h1>
-      <Link to='/conta'>
-        <img src={userImage} alt='imagem do usuario' />
+      <Link to='/conta' >
+        <img src={userImage} alt='imagem do usuario' data-identifier="habit-page-action"/>
       </Link>
     </Container>
   );

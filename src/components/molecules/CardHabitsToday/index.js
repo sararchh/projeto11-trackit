@@ -42,7 +42,7 @@ function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
   };
 
   return (
-    <Container>
+    <Container data-identifier="today-infos">
       <div>
         <h1>{name}</h1>
         <div className='cardInfo'>
@@ -53,6 +53,7 @@ function CardHabitsToday({ name, id, highestSequence, currentSequence, done }) {
 
       <div>
         <ButtonConfirm
+          data-identifier="done-habit-btn"
           type='button'
           onClick={() => setConfirmHabit(!confirmHabit)}
           confirmHabit={confirmHabit || done}

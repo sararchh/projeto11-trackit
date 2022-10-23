@@ -53,9 +53,9 @@ function CardHabits({ days, id, name }) {
   return (
     <Container>
       <div className='divName'>
-        <h1>{name}</h1>
+        <h1 data-identifier="habit-name" >{name}</h1>
 
-        <button onClick={() => handleConfirmDelete(id)}>
+        <button onClick={() => handleConfirmDelete(id)} data-identifier="delete-habit-btn">
           <BiTrash />
         </button>
       </div>

@@ -20,7 +20,7 @@ function Footer() {
 
   return (
     <Container>
-      <Link to='/habitos'>
+      <Link to='/habitos' data-identifier="habit-page-action" >
         <p>Hábitos</p>
       </Link>
 
@@ -39,7 +39,7 @@ function Footer() {
         />
       </Link>
 
-      <Link to='/historico'>
+      <Link to='/historico' data-identifier="historic-page-action">
         <p>Histórico</p>
       </Link>
 

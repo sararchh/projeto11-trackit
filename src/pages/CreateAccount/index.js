@@ -42,6 +42,7 @@ function CreateAccount() {
 
       <Form onSubmit={handleSubmit(handleCreateAccount)}>
         <InputStyled
+          data-identifier="input-email"
           name='email'
           placeholder='email'
           onChange={value => setValue('email', value)}
@@ -50,6 +51,7 @@ function CreateAccount() {
         />
 
         <InputStyled
+          data-identifier="input-password"
           name='password'
           placeholder='senha'
           onChange={value => setValue('password', value)}
@@ -58,6 +60,7 @@ function CreateAccount() {
         />
 
         <InputStyled
+          data-identifier="input-name"
           name='name'
           placeholder='name'
           onChange={value => setValue('name', value)}
@@ -66,6 +69,7 @@ function CreateAccount() {
         />
 
         <InputStyled
+          data-identifier="input-photo"
           name='image'
           placeholder='foto'
           onChange={value => setValue('image', value)}
@@ -93,7 +97,7 @@ function CreateAccount() {
       </Form>
 
       <Link to='/'>
-        <ButtonAccount>Já tem uma conta? Faça login!</ButtonAccount>
+        <ButtonAccount  data-identifier="back-to-login-action">Já tem uma conta? Faça login!</ButtonAccount>
       </Link>
 
     </Container>

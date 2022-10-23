@@ -6,6 +6,7 @@ function ButtonDay({ day, func, daySelected }) {
 
   return (
     <Button
+    data-identifier="week-day-btn"
       type='button'
       onClick={func}
       daySelected={daySelected}

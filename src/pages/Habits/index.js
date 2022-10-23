@@ -31,6 +31,7 @@ function Habits() {
       <ContentTitle>
         <Title>Meus hábitos</Title>
         <ButtonStyled
+          data-identifier="create-habit-btn"
           type='button'
           w='40px'
           h='35px'
@@ -41,7 +42,7 @@ function Habits() {
       </ContentTitle>
 
       {openCardCreateHabits && (
-        <CardCreateHabits setOpenCardCreateHabits={setOpenCardCreateHabits} />
+        <CardCreateHabits setOpenCardCreateHabits={setOpenCardCreateHabits} data-identifier="create-habit-btn"/>
       )}
 
       {Boolean(habitsUser.length) ?
@@ -54,7 +55,7 @@ function Habits() {
           />
         )))
         :
-        (<Text>
+        (<Text data-identifier="no-habit-message">
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
         </Text>)
       }

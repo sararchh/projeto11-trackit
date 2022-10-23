@@ -27,7 +27,7 @@ function Home() {
   const { errors } = formState;
 
   const handleLogin = () => {
-    
+
     const values = getValues();
 
     signInWithMail(values);
@@ -39,6 +39,7 @@ function Home() {
 
       <Form onSubmit={handleSubmit(handleLogin)}>
         <InputStyled
+          data-identifier="input-email"
           name='email'
           placeholder='email'
           onChange={value => setValue('email', value)}
@@ -47,6 +48,7 @@ function Home() {
         />
 
         <InputStyled
+          data-identifier="input-password"
           name='password'
           placeholder='senha'
           onChange={value => setValue('password', value)}
@@ -54,7 +56,8 @@ function Home() {
           disabled={disabledInput}
         />
 
-        <ButtonStyled >
+        <ButtonStyled data-identifier="login-btn" >
+
           {loading ?
             <ThreeDots
               height="80"
@@ -74,7 +77,7 @@ function Home() {
       </Form>
 
       <Link to='/cadastro'>
-        <ButtonAccount>Não tem uma conta? Cadastre-se!</ButtonAccount>
+        <ButtonAccount data-identifier="sign-up-action" >Não tem uma conta? Cadastre-se!</ButtonAccount>
       </Link>
     </Container>
   );
